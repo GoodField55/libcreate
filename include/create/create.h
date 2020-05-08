@@ -658,6 +658,17 @@ namespace create {
        * \return total number of serial packets.
        */
       uint64_t getTotalPackets() const;
+
+      /** 2020.05.07 **/
+
+      int32_t getEncoderLeft() const;
+
+      /** 2020.05.07 **/
+
+      int32_t getEncoderRight() const;
+
+
+
   };  // end Create class
 
 }  // namespace create

@@ -1083,4 +1083,31 @@ namespace create {
     return serial->getTotalPackets();
   }
 
+
+  /** 2020.05.07 **/
+
+  int32_t Create::getEncoderLeft() const {
+    if (data->isValidPacketID(ID_LEFT_ENC)) {
+      return (GET_DATA(ID_LEFT_ENC) );
+    }
+    else {
+      CERR("[create::Create] ", "Encoder Left not supported!");
+      return 0;
+    }
+  }
+
+  /** 2020.05.07 **/
+
+  int32_t Create::getEncoderRight() const {
+    if (data->isValidPacketID(ID_RIGHT_ENC)) {
+      return (GET_DATA(ID_RIGHT_ENC) );
+    }
+    else {
+      CERR("[create::Create] ", "Encoder Right not supported!");
+      return 0;
+    }
+  }
+
+
+
 } // end namespace

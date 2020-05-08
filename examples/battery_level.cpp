@@ -63,13 +63,25 @@ int main(int argc, char** argv) {
   // Get battery capacity (max charge)
   const float battery_capacity = robot.getBatteryCapacity();
 
+  /* 2020.05.08 */
+  int32_t enc_left;
+  int32_t enc_right;
+
   float battery_charge = 0.0f;
   while (true) {
     // Get battery charge
     battery_charge = robot.getBatteryCharge();
 
+    /* 2020.05.08 */
+    enc_left = robot.getEncoderLeft();
+    enc_right = robot.getEncoderRight();
+
+
     // Print battery percentage
-    std::cout << "\rBattery level: " << (battery_charge / battery_capacity) * 100.0 << "%";
+    std::cout << "Battery level: " << (battery_charge / battery_capacity) * 100.0 << "%\n";
+
+    /* 2020.05.08 */
+    std::cout << "enc_left: " << enc_left << " , enc_right: " << enc_right << "\n";
 
     usleep(100000);  // 10 Hz
   }
