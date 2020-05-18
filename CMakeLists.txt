@@ -164,40 +164,40 @@ install(
 # Testing #
 ###########
 
-if(LIBCREATE_BUILD_TESTS)
-  find_package(GTest)
-  include_directories(${GTEST_INCLUDE_DIRS})
-endif()
+#if(LIBCREATE_BUILD_TESTS)
+#  find_package(GTest)
+#  include_directories(${GTEST_INCLUDE_DIRS})
+#endif()
 
-if(LIBCREATE_BUILD_TESTS AND ${GTEST_FOUND})
-  message("GTest installation found. Building tests.")
+#if(LIBCREATE_BUILD_TESTS AND ${GTEST_FOUND})
+#  message("GTest installation found. Building tests.")
 
-  enable_testing()
+#  enable_testing()
 
-  # Add tests
-  set(LIBCREATE_TESTS
-    test_create
-    test_data
-    test_packet
-    test_robot_model
-    test_serial_stream
-    test_serial_query
-  )
+#  # Add tests
+#  set(LIBCREATE_TESTS
+#    test_create
+#    test_data
+#    test_packet
+#    test_robot_model
+#    test_serial_stream
+#    test_serial_query
+#  )
 
-  foreach(LIBCREATE_TEST ${LIBCREATE_TESTS})
-    add_executable(${LIBCREATE_TEST} tests/${LIBCREATE_TEST}.cpp)
+#  foreach(LIBCREATE_TEST ${LIBCREATE_TESTS})
+#    add_executable(${LIBCREATE_TEST} tests/${LIBCREATE_TEST}.cpp)
 
-    target_link_libraries(${LIBCREATE_TEST}
-      ${LIBRARY_NAME}
-      ${GTEST_LIBRARIES}
-      gtest_main
-    )
+#    target_link_libraries(${LIBCREATE_TEST}
+#      ${LIBRARY_NAME}
+#      ${GTEST_LIBRARIES}
+#      gtest_main
+#    )
 
-    add_test(
-      NAME ${LIBCREATE_TEST}
-      COMMAND ${LIBCREATE_TEST}
-    )
-  endforeach()
-else()
-  message("No GTest installation found. Skipping tests.")
-endif()
+#    add_test(
+#      NAME ${LIBCREATE_TEST}
+#      COMMAND ${LIBCREATE_TEST}
+#    )
+#  endforeach()
+#else()
+#  message("No GTest installation found. Skipping tests.")
+#endif()

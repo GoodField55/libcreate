@@ -661,11 +661,11 @@ namespace create {
 
       /** 2020.05.07 **/
 
-      int32_t getEncoderLeft() const;
+      int16_t getEncoderLeft() const;
 
       /** 2020.05.07 **/
 
-      int32_t getEncoderRight() const;
+      int16_t getEncoderRight() const;
 
 
 

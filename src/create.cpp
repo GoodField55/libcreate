@@ -51,7 +51,9 @@ namespace create {
   }
 
   Create::Create(RobotModel m) : model(m) {
+    std::cout << "Before init\n";
     init();
+    std::cout << "After init\n";
   }
 
   Create::Create(const std::string& dev, const int& baud, RobotModel m) : model(m) {
@@ -1086,7 +1088,7 @@ namespace create {
 
   /** 2020.05.07 **/
 
-  int32_t Create::getEncoderLeft() const {
+  int16_t Create::getEncoderLeft() const {
     if (data->isValidPacketID(ID_LEFT_ENC)) {
       return (GET_DATA(ID_LEFT_ENC) );
     }
@@ -1098,7 +1100,7 @@ namespace create {
 
   /** 2020.05.07 **/
 
-  int32_t Create::getEncoderRight() const {
+  int16_t Create::getEncoderRight() const {
     if (data->isValidPacketID(ID_RIGHT_ENC)) {
       return (GET_DATA(ID_RIGHT_ENC) );
     }
