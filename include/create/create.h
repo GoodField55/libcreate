@@ -75,8 +75,13 @@ namespace create {
       create::Pose pose;
       create::Vel vel;
 
-      uint32_t prevTicksLeft;
-      uint32_t prevTicksRight;
+//      uint32_t prevTicksLeft;
+//      uint32_t prevTicksRight;
+
+      // 2020.05.19 uint32_t -> int16_t
+      int16_t prevTicksLeft;
+      int16_t prevTicksRight;
+
       float totalLeftDist;
       float totalRightDist;
       bool firstOnData;

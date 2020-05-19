@@ -90,6 +90,9 @@ namespace create {
   }
 
   void Create::onData() {
+
+    // std::cout << "getVersion = " << model.getVersion() << "\n";
+
     if (firstOnData) {
       if (model.getVersion() >= V_3) {
         // Initialize tick counts
@@ -142,9 +145,14 @@ namespace create {
       leftWheelDist = deltaDist - (wheelDistDiff / 2.0);
       rightWheelDist = deltaDist + (wheelDistDiff / 2.0);
     } else if (model.getVersion() >= V_3) {
-      // Get cumulative ticks (wraps around at 65535)
-      uint16_t totalTicksLeft = GET_DATA(ID_LEFT_ENC);
-      uint16_t totalTicksRight = GET_DATA(ID_RIGHT_ENC);
+      // // Get cumulative ticks (wraps around at 65535)
+      // uint16_t totalTicksLeft = GET_DATA(ID_LEFT_ENC);
+      // uint16_t totalTicksRight = GET_DATA(ID_RIGHT_ENC);
+
+      // 2020.05.19 uint16_t -> int16_t
+      int16_t totalTicksLeft = GET_DATA(ID_LEFT_ENC);
+      int16_t totalTicksRight = GET_DATA(ID_RIGHT_ENC);
+
       // Compute ticks since last update
       int ticksLeft = totalTicksLeft - prevTicksLeft;
       int ticksRight = totalTicksRight - prevTicksRight;

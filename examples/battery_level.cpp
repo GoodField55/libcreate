@@ -64,8 +64,8 @@ int main(int argc, char** argv) {
   const float battery_capacity = robot.getBatteryCapacity();
 
   /* 2020.05.08 */
-  int32_t enc_left;
-  int32_t enc_right;
+  int16_t enc_left;
+  int16_t enc_right;
 
   float battery_charge = 0.0f;
   while (true) {

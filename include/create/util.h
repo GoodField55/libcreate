@@ -41,6 +41,8 @@ namespace create {
     static const uint8_t STREAM_HEADER = 19;
     static const float V_3_TICKS_PER_REV = 508.8;
     static const uint32_t V_3_MAX_ENCODER_TICKS = 65535;
+    // 2020.05.19 uint16_t(65535) -> int16_t(32767) -> uint16_t(65535)
+    // static const uint32_t V_3_MAX_ENCODER_TICKS = 32767;
     static const float MAX_RADIUS = 2.0;
     static const float STRAIGHT_RADIUS = 32.768;
     static const float IN_PLACE_RADIUS = 0.001;
