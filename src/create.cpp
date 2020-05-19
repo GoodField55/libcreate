@@ -146,26 +146,50 @@ namespace create {
       rightWheelDist = deltaDist + (wheelDistDiff / 2.0);
     } else if (model.getVersion() >= V_3) {
       // // Get cumulative ticks (wraps around at 65535)
-      // uint16_t totalTicksLeft = GET_DATA(ID_LEFT_ENC);
-      // uint16_t totalTicksRight = GET_DATA(ID_RIGHT_ENC);
-
       // 2020.05.19 uint16_t -> int16_t
       int16_t totalTicksLeft = GET_DATA(ID_LEFT_ENC);
       int16_t totalTicksRight = GET_DATA(ID_RIGHT_ENC);
+      // uint16_t totalTicksLeft = GET_DATA(ID_LEFT_ENC);
+      // uint16_t totalTicksRight = GET_DATA(ID_RIGHT_ENC);
 
+      // 2020.05.19 Modify how to calculate encoder counter roll over
       // Compute ticks since last update
-      int ticksLeft = totalTicksLeft - prevTicksLeft;
-      int ticksRight = totalTicksRight - prevTicksRight;
+      int32_t ticksLeft_buf = (int32_t)totalTicksLeft - (int32_t)prevTicksLeft;
+      int32_t ticksRight_buf = (int32_t)totalTicksRight - (int32_t)prevTicksRight;
       prevTicksLeft = totalTicksLeft;
       prevTicksRight = totalTicksRight;
 
       // Handle wrap around
-      if (fabs(ticksLeft) > 0.9 * util::V_3_MAX_ENCODER_TICKS) {
-        ticksLeft = (ticksLeft % util::V_3_MAX_ENCODER_TICKS) + 1;
+      int16_t ticksLeft;
+      int16_t ticksRight;
+      if (ticksLeft_buf < -0.7 * 65536 ) {              // over 32767 -> -32768
+        ticksLeft = (int16_t)(ticksLeft_buf + 65536 );
+      }else if ( ticksLeft_buf > 0.7 * 65536 ){          // under -32768 -> 32767
+        ticksLeft = (int16_t)(ticksLeft_buf - 65536);
+      }else{
+        ticksLeft = (int16_t)ticksLeft_buf;
       }
-      if (fabs(ticksRight) > 0.9 * util::V_3_MAX_ENCODER_TICKS) {
-        ticksRight = (ticksRight % util::V_3_MAX_ENCODER_TICKS) + 1;
+      if (ticksRight_buf < -0.7 * 65536 ) {             // over 32767 -> -32768
+        ticksRight = (int16_t)(ticksRight_buf + 65536 );
+      }else if ( ticksRight_buf > 0.7 * 65536 ){         // under -32768 -> 32767
+        ticksRight = (int16_t)(ticksRight_buf - 65536);
+      }else{
+        ticksRight = (int16_t)ticksRight_buf;
       }
+
+//      // Compute ticks since last update
+//      int ticksLeft = totalTicksLeft - prevTicksLeft;
+//      int ticksRight = totalTicksRight - prevTicksRight;
+//      prevTicksLeft = totalTicksLeft;
+//      prevTicksRight = totalTicksRight;
+
+//      // Handle wrap around
+//      if (fabs(ticksLeft) > 0.9 * util::V_3_MAX_ENCODER_TICKS) {
+//        ticksLeft = (ticksLeft % util::V_3_MAX_ENCODER_TICKS) + 1;
+//      }
+//      if (fabs(ticksRight) > 0.9 * util::V_3_MAX_ENCODER_TICKS) {
+//        ticksRight = (ticksRight % util::V_3_MAX_ENCODER_TICKS) + 1;
+//      }
 
       // Compute distance travelled by each wheel
       leftWheelDist = (ticksLeft / util::V_3_TICKS_PER_REV)
