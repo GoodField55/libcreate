@@ -672,7 +672,12 @@ namespace create {
 
       int16_t getEncoderRight() const;
 
+      /** 2020.05.20 **/
 
+      uint16_t getCliffSignalLeft() const;
+      uint16_t getCliffSignalFrontLeft() const;
+      uint16_t getCliffSignalRight() const;
+      uint16_t getCliffSignalFrontRight() const;
 
   };  // end Create class
 
