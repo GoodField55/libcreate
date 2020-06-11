@@ -482,8 +482,11 @@ namespace create {
 
   bool Create::drive(const float& xVel, const float& angularVel) {
     // Compute left and right wheel velocities
-    float leftVel = xVel - ((model.getAxleLength() / 2.0) * angularVel);
-    float rightVel = xVel + ((model.getAxleLength() / 2.0) * angularVel);
+    // 2020.06.11
+    float leftVel = xVel - (model.getAxleLength() * angularVel);
+    float rightVel = xVel + (model.getAxleLength() * angularVel);
+    //float leftVel = xVel - ((model.getAxleLength() / 2.0) * angularVel);
+    //float rightVel = xVel + ((model.getAxleLength() / 2.0) * angularVel);
     return driveWheels(leftVel, rightVel);
   }
 
